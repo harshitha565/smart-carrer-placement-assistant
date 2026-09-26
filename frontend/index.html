@@ -1,10 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title> Carrer Compass AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+    <title>Carrer Compass AI</title>
+    <style>
+      body{
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background:#f4f7fb;
+        color:#222;
+      }
+      header{
+        background:#182848;
+        color: white;
+        padding:25px;
+        text-align: center;
+      }
+      header h1{
+        margin: 0;
+        font-size: 32px;
+      }
+      header p{
+        margin-top:8px;
+      }
+      h2{
+        color:#182848;
+      }
+      label{
+        display:block;
+        margin-top:20px;
+        font-weight:bold;
+      }
+      input, select{
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 1-x solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+      button{
+        margin-top: 25px;
+        width: 100%;
+        padding:14px;
+        background: #182848;
+        color:white;
+        border: none;
+        border-radius: 8px;
+        font-size:16px;
+        cursor:pointer;
+      }
+      button:hover{
+        background:#2b4c7e;
+      }
+      #result{
+        margin-top: 25px;
+        padding:20px;
+        background-radius:10px;
+        display: none;
+      }
+      </style>
   </head>
   <body>
-    <h1>Carrer Compass AI</h1>
-    <p>Explore your carrer path with AI.</p>
+    <header>
+      <h1>🎯 Carrer Compass AI</h1>
+      <p> Discover a carrer path based on your interests and skills</p>
+    </header>
+    <div class="container">
+      <h2>Tell us about yourself</h2>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Enter Your Name">
+      <label for="interest">Your Main Interest</label>
+      <select id="interest">
+        <option value="">Select an interest</option>
+        <option value="coding">Coding & Technology</option>
+        <option value="data">Data & Analytics</option>
+        <option value="design">Design & Creativity</option>
+        <option value="business">Business & Management</option>
+      </select>
+      <label for="skill">Your Strongest Skill</label>
+      <select id="skill">
+        <option value="">Select a Skill</option>
+        <option
+          value="programming">Programming</option>
+        <option value="analysis">Problem Solving & Analysis</option>
+        <option
+          value="communication">Communication</option>
+        <option value="creativity">Creativity</option>
+      </select>
+      <button onclick="recommendCareer()">Find My Carrer🚀</button>
+      <div id="result"></div>
+    </div>
+    <script>
+      function recommendCarrer(){
+        let name = document.getElementById("name").value;
+        let interest=document.getElementByid("interest").value;
+        let skill=document.getElementById("skill").value;
+        let result=document.getElementById("result");
+    </script>
+    
+  if (name === "" || interest === "" || skill === "") {
+        result.style.display = "block";
+        result.innerHTML = "⚠️ Please fill in all the details.";
+        return;
+    }
+
+    let career = "";
+
+    if (interest === "coding" && skill === "programming") {
+        career = "Software Developer 💻";
+    }
+    else if (interest === "data" && skill === "analysis") {
+        career = "Data Analyst 📊";
+    }
+    else if (interest === "design" && skill === "creativity") {
+        career = "UI/UX Designer 🎨";
+    }
+    else if (interest === "business" && skill === "communication") {
+        career = "Business Analyst 📈";
+    }
+    else {
+        career = "Technology & Business Professional 🚀";
+    }
+
+    result.style.display = "block";
+
+    result.innerHTML =
+        "<h2>Hello " + name + "! 👋</h2>" +
+        "<p>Based on your selected interests and skills, a possible career direction is:</p>" +
+        "<h2>" + career + "</h2>" +
+        "<p>Keep developing your skills and explore this career path further.</p>";
+}
+  </script>
   </body>
+        
+    </style>
 </html>
