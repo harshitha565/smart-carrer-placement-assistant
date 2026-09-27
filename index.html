@@ -113,6 +113,14 @@
         <option value="communication">Communication</option>
         <option value="creativity">Creativity</option>
     </select>
+    <label for="goal"> Your Carrer Goal</label>
+    <select id="goal">
+        <option value="">Select Your goal</option>
+        <option value="job">Get a job quckily</option>
+        <option value="salary">High salary carrer</option>
+        <option value="government">Government job</option>
+        <option value="business">Start a business</option>
+    </select>
 
     <button onclick="recommendCareer()">Find My Career 🚀</button>
 
@@ -126,6 +134,7 @@ function recommendCareer() {
     let name = document.getElementById("name").value;
     let interest = document.getElementById("interest").value;
     let skill = document.getElementById("skill").value;
+    let skill=document.getElementById("goal").value;
     let result = document.getElementById("result");
 
     if (name === "" || interest === "" || skill === "") {
