@@ -131,19 +131,19 @@
 <script>
 function recommendCareer() {
 
-    let name = document.getElementById("name").value;
-    let interest = document.getElementById("interest").value;
+    const name = document.getElementById("name").value.trim();
+    const interest = document.getElementById("interest").value;
     let skill = document.getElementById("skill").value;
     let goal=document.getElementById("goal").value;
     let result = document.getElementById("result");
 
-    if (name === "" || interest === "" || skill === "") {
+    if (name === "" || interest === "" || skill === ""||goal ==="") {
         result.style.display = "block";
-        result.innerHTML = "⚠️ Please fill in all the details.";
+        result.innerHTML = "<h3>⚠️ Please fill in all the details.</h3>";
         return;
     }
 
-    let career = "";
+    let career;
     if(goal ==="government"){
         career="Government Technology Career🏛️";
     }
@@ -167,7 +167,7 @@ function recommendCareer() {
 
     result.innerHTML =
         "<h2>Hello " + name + "! 👋</h2>" +
-        "<p>Based on your selected interests and skills, a possible career direction is:</p>" +
+        "<p>Based on your  interests and skills and career goal:</p>" +
         "<h2>" + career + "</h2>" +
         "<p>Keep developing your skills and explore this career path further.</p>";
 }
