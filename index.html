@@ -124,7 +124,7 @@
     <label for="work">Preferred Work Type</label>
     <select id="work">
         <option value="">Select work type</option>
-        <option value="techincal"Technical">Technical Woek</option>
+        <option value="techincal"Technical">Technical Work</option>
         <option value="creative">Creative Work</option>
         <option value="analytical">Analytical Work</option>
         <option value="people">Working With People</option>
@@ -146,7 +146,7 @@ function recommendCareer() {
     const work=document.getElementById("work").value;
     let result = document.getElementById("result");
 
-    if (name === "" || interest === "" || skill === ""||goal ==="") {
+    if (name === "" || interest === "" || skill === ""||goal ===""||work ==="") {
         result.style.display = "block";
         result.innerHTML = "<h3>⚠️ Please fill in all the details.</h3>";
         return;
