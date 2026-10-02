@@ -153,45 +153,106 @@ function recommendCareer() {
     }
 
     let career;
+    let skills;
+    let jobs;
+    let roadmap;
     if(goal ==="government"){
         career="Government Technology Career🏛️";
+        skills="Computer Basics, Programming Aptitude, General Knowledge";
+        jobs = "Government IT jobs, Techincal Assistant, Computer Operator";
+        roadmap="Learn technical skills -> prepare for exams -> Apply for government jobs";
     }
     else if(work ==="techincal" && interest ==="coding"){
         career = "Software Developer 💻";
+        skills="Java,Python,SQL,Git";
+        jobs="Software Developer,Backend Developer";
+        roadmap="programming -> DSA ->Projects ->Interview Preparation";
     }
     else if(work ==="analytical" && interest ==="data"){
          career = "Data Analyst 📊";
+        skills="Exce"Excel, SQL, Python, Power BI";
+        jobs = "Data Analyst, Business Intelligence Analyst";
+        roadmap = "Excel → SQL → Power BI → Python → Projects";
+
     }
-    else if(work ==="creative" && interest ==="design"){
-          career = "UI/UX Designer 🎨";
-        }
-     else if(work ==="people" && interest ==="business"){
-        career = "Business Analyst 📈";        
-     }  
-    else if (interest === "coding" && skill === "programming") {
-        career = "Software Developer 💻";
-    }
-    else if (interest === "data" && skill === "analysis") {
-        career = "Data Analyst 📊";
-    }
-    else if (interest === "design" && skill === "creativity") {
+
+    else if (work === "creative" && interest === "design") {
+
         career = "UI/UX Designer 🎨";
+        skills = "Figma, UI Design, UX Research";
+        jobs = "UI Designer, UX Designer";
+        roadmap = "Design Basics → Figma → Projects → Portfolio";
+
     }
-    else if (interest === "business" && skill === "communication") {
+
+    else if (work === "people" && interest === "business") {
+
         career = "Business Analyst 📈";
+        skills = "Communication, Excel, SQL, Power BI";
+        jobs = "Business Analyst, Associate Business Analyst";
+        roadmap = "Business Basics → Excel → SQL → Power BI → Projects";
+
     }
+
+    else if (interest === "coding" && skill === "programming") {
+
+        career = "Software Developer 💻";
+        skills = "Java, Python, SQL, Git";
+        jobs = "Software Developer, Backend Developer";
+        roadmap = "Programming → DSA → Projects → Interview Preparation";
+
+    }
+
+    else if (interest === "data" && skill === "analysis") {
+
+        career = "Data Analyst 📊";
+        skills = "Excel, SQL, Python, Power BI";
+        jobs = "Data Analyst, Business Intelligence Analyst";
+        roadmap = "Excel → SQL → Power BI → Python → Projects";
+
+    }
+
+    else if (interest === "design" && skill === "creativity") {
+
+        career = "UI/UX Designer 🎨";
+        skills = "Figma, UI Design, UX Research";
+        jobs = "UI Designer, UX Designer";
+        roadmap = "Design Basics → Figma → Projects → Portfolio";
+
+    }
+
+    else if (interest === "business" && skill === "communication") {
+
+        career = "Business Analyst 📈";
+        skills = "Communication, Excel, SQL, Power BI";
+        jobs = "Business Analyst, Associate Business Analyst";
+        roadmap = "Business Basics → Excel → SQL → Power BI → Projects";
+
+    }
+
     else {
+
         career = "Technology & Business Professional 🚀";
+        skills = "Communication, Problem Solving, Digital Skills";
+        jobs = "Technology Associate, Business Associate";
+        roadmap = "Build skills → Complete projects → Gain experience → Apply for jobs";
+
     }
 
     result.style.display = "block";
 
     result.innerHTML =
         "<h2>Hello " + name + "! 👋</h2>" +
-        "<p>Based on your  interests and skills and career goal:</p>" +
-        "<h2>" + career + "</h2>" +
-        "<p>Keep developing your skills and explore this career path further.</p>";
+        "<h2>🎯 Recommended Career</h2>" +
+        "<h3>" + career + "</h3>" +
+        "<h3>📚 Skills to Learn</h3>" +
+        "<p>" + skills + "</p>" +
+        "<h3>💼 Possible Job Roles</h3>" +
+        "<p>" + jobs + "</p>" +
+        "<h3>🛣️ Career Roadmap</h3>" +
+        "<p>" + roadmap + "</p>";
 }
+   
 </script>
 
 </body>
