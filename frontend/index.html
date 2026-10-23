@@ -6,44 +6,41 @@
     <title>Career Compass AI</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
             background: #f4f7fb;
+            margin: 0;
             color: #222;
+            line-height: 1.6;
         }
 
         header {
             background: #182848;
             color: white;
-            padding: 25px;
             text-align: center;
+            padding: 25px 15px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 32px;
-        }
-
-        header p {
-            margin-top: 8px;
         }
 
         .container {
             max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
+            margin: 30px auto;
+            padding: 25px;
             background: white;
-            border-radius: 15px;
-        }
-
-        h2 {
-            color: #182848;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         label {
             display: block;
-            margin-top: 20px;
+            margin-top: 18px;
             font-weight: bold;
         }
 
@@ -52,18 +49,18 @@
             padding: 12px;
             margin-top: 8px;
             border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
+            border-radius: 7px;
+            font-size: 15px;
         }
 
         button {
-            margin-top: 25px;
             width: 100%;
             padding: 14px;
+            margin-top: 24px;
             background: #182848;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 7px;
             font-size: 16px;
             cursor: pointer;
         }
@@ -73,94 +70,400 @@
         }
 
         #result {
+            display: none;
             margin-top: 25px;
             padding: 20px;
             background: #eef3ff;
             border-radius: 10px;
-            display: none;
+        }
+
+        h2, h3 {
+            color: #182848;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px 10px;
+                padding: 18px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🎯 Career Compass AI</h1>
-    <p>Discover a career path based on your interests and skills</p>
-</header>
+    <header>
+        <h1>🎯 Career Compass AI</h1>
+        <p>Discover Your Career Path</p>
+    </header>
 
-<div class="container">
+    <main class="container">
 
-    <h2>Tell us about yourself</h2>
+        <h2>Tell Us About Yourself</h2>
+        <p>Answer these questions to receive your career recommendation.</p>
 
-    <label for="name">Your Name</label>
-    <input type="text" id="name" placeholder="Enter your name">
+        <form id="careerForm">
 
-    <label for="interest">Your Main Interest</label>
-    <select id="interest">
-        <option value="">Select an interest</option>
-        <option value="coding">Coding & Technology</option>
-        <option value="data">Data & Analytics</option>
-        <option value="design">Design & Creativity</option>
-        <option value="business">Business & Management</option>
-    </select>
+            <label for="name">Your Name</label>
+            <input type="text" id="name"
+                   placeholder="Enter your name" required>
 
-    <label for="skill">Your Strongest Skill</label>
-    <select id="skill">
-        <option value="">Select a skill</option>
-        <option value="programming">Programming</option>
-        <option value="analysis">Problem Solving & Analysis</option>
-        <option value="communication">Communication</option>
-        <option value="creativity">Creativity</option>
-    </select>
+            <label for="interest">Your Main Interest</label>
+            <select id="interest" required>
+                <option value="">Select an interest</option>
+                <option value="coding">Coding and Technology</option>
+                <option value="data">Data and Analytics</option>
+                <option value="design">Design and Creativity</option>
+                <option value="business">Business and Management</option>
+            </select>
 
-    <button onclick="recommendCareer()">Find My Career 🚀</button>
+            <label for="skill">Your Strongest Skill</label>
+            <select id="skill" required>
+                <option value="">Select a skill</option>
+                <option value="programming">Programming</option>
+                <option value="analysis">Problem Solving and Analysis</option>
+                <option value="communication">Communication</option>
+                <option value="creativity">Creativity</option>
+            </select>
 
-    <div id="result"></div>
+            <label for="goal">Your Career Goal</label>
+            <select id="goal" required>
+                <option value="">Select your goal</option>
+                <option value="job">Get a Job Quickly</option>
+                <option value="salary">High Salary</option>
+                <option value="government">Government Job</option>
+                <option value="business">Start a Business</option>
+            </select>
 
-</div>
+            <label for="work">Preferred Work Type</label>
+            <select id="work" required>
+                <option value="">Select work type</option>
+                <option value="technical">Technical Work</option>
+                <option value="creative">Creative Work</option>
+                <option value="analytical">Analytical Work</option>
+                <option value="people">Working With People</option>
+            </select>
 
-<script>
-function recommendCareer() {
+            <button type="submit">Find My Career 🚀</button>
 
-    let name = document.getElementById("name").value;
-    let interest = document.getElementById("interest").value;
-    let skill = document.getElementById("skill").value;
-    let result = document.getElementById("result");
+        </form>
 
-    if (name === "" || interest === "" || skill === "") {
-        result.style.display = "block";
-        result.innerHTML = "⚠️ Please fill in all the details.";
-        return;
-    }
+        <section id="result" aria-live="polite"></section>
 
-    let career = "";
+    </main>
 
-    if (interest === "coding" && skill === "programming") {
-        career = "Software Developer 💻";
-    }
-    else if (interest === "data" && skill === "analysis") {
-        career = "Data Analyst 📊";
-    }
-    else if (interest === "design" && skill === "creativity") {
-        career = "UI/UX Designer 🎨";
-    }
-    else if (interest === "business" && skill === "communication") {
-        career = "Business Analyst 📈";
-    }
-    else {
-        career = "Technology & Business Professional 🚀";
-    }
+    <footer>
+        <p>Career Compass AI | Explore, Learn, Grow 🚀</p>
+    </footer>
 
-    result.style.display = "block";
+    <script>
+        const careers = [
+            {
+                name: "Software Developer 💻",
+                interest: ["coding"],
+                skills: ["programming", "analysis"],
+                work: ["technical"],
+                goals: ["job", "salary", "business"],
+                description:
+                    "Build and maintain software applications.",
+                learn: [
+                    "Java Programming",
+                    "Data Structures and Algorithms",
+                    "Problem Solving",
+                    "Git and GitHub",
+                    "Software Projects"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Learn Java basics, conditions and loops.",
+                    "Weeks 3-4: Practise arrays, strings and algorithms.",
+                    "Weeks 5-6: Learn OOP and GitHub.",
+                    "Weeks 7-8: Build and publish a project."
+                ]
+            },
+            {
+                name: "Data Analyst 📊",
+                interest: ["data"],
+                skills: ["analysis", "programming"],
+                work: ["analytical"],
+                goals: ["job", "salary", "business"],
+                description:
+                    "Analyse data and turn it into useful information.",
+                learn: [
+                    "Excel",
+                    "SQL",
+                    "Python",
+                    "Power BI",
+                    "Data Interpretation"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Learn Excel and basic statistics.",
+                    "Weeks 3-4: Practise SQL queries.",
+                    "Weeks 5-6: Learn Python for data analysis.",
+                    "Weeks 7-8: Create a data dashboard project."
+                ]
+            },
+            {
+                name: "UI/UX Designer 🎨",
+                interest: ["design"],
+                skills: ["creativity", "communication"],
+                work: ["creative"],
+                goals: ["job", "salary", "business"],
+                description:
+                    "Design useful and attractive digital experiences.",
+                learn: [
+                    "Design Principles",
+                    "Figma",
+                    "User Research",
+                    "Wireframes and Prototypes",
+                    "Portfolio Development"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Learn design principles.",
+                    "Weeks 3-4: Practise Figma and wireframes.",
+                    "Weeks 5-6: Learn user research and prototyping.",
+                    "Weeks 7-8: Build a design portfolio."
+                ]
+            },
+            {
+                name: "Business Analyst 📈",
+                interest: ["business", "data"],
+                skills: ["communication", "analysis"],
+                work: ["people", "analytical"],
+                goals: ["job", "salary", "business"],
+                description:
+                    "Understand business problems and help organisations solve them.",
+                learn: [
+                    "Excel",
+                    "Communication",
+                    "Requirements Analysis",
+                    "Process Mapping",
+                    "Business Case Studies"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Practise Excel and communication.",
+                    "Weeks 3-4: Learn requirements gathering.",
+                    "Weeks 5-6: Practise process mapping.",
+                    "Weeks 7-8: Complete a business case study."
+                ]
+            },
+            {
+                name: "Government Exam Preparation 🏛️",
+                interest: ["business", "data", "coding", "design"],
+                skills: [
+                    "analysis",
+                    "communication",
+                    "programming",
+                    "creativity"
+                ],
+                work: ["technical", "analytical", "people", "creative"],
+                goals: ["government"],
+                description:
+                    "Prepare for suitable government examinations and explore eligible government careers.",
+                learn: [
+                    "Quantitative Aptitude",
+                    "Reasoning",
+                    "General Awareness",
+                    "English",
+                    "Exam-Specific Knowledge"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Identify exams and verify official eligibility.",
+                    "Weeks 3-4: Study aptitude and reasoning.",
+                    "Weeks 5-6: Practise English and general awareness.",
+                    "Weeks 7-8: Take mock tests and review mistakes."
+                ]
+            },
+            {
+                name: "Entrepreneur / Startup Founder 🚀",
+                interest: ["business"],
+                skills: ["creativity", "communication", "analysis"],
+                work: ["people", "creative", "analytical"],
+                goals: ["business"],
+                description:
+                    "Develop business ideas and solve customer problems.",
+                learn: [
+                    "Market Research",
+                    "Business Planning",
+                    "Communication",
+                    "Basic Finance",
+                    "Product Testing"
+                ],
+                roadmap: [
+                    "Weeks 1-2: Identify a problem to solve.",
+                    "Weeks 3-4: Research customers and competitors.",
+                    "Weeks 5-6: Prepare a business plan and budget.",
+                    "Weeks 7-8: Test your idea and collect feedback."
+                ]
+            }
+        ];
 
-    result.innerHTML =
-        "<h2>Hello " + name + "! 👋</h2>" +
-        "<p>Based on your selected interests and skills, a possible career direction is:</p>" +
-        "<h2>" + career + "</h2>" +
-        "<p>Keep developing your skills and explore this career path further.</p>";
-}
-</script>
+        const form = document.getElementById("careerForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            recommendCareer();
+        });
+
+        function recommendCareer() {
+            const name =
+                document.getElementById("name").value.trim();
+
+            const interest =
+                document.getElementById("interest").value;
+
+            const skill =
+                document.getElementById("skill").value;
+
+            const goal =
+                document.getElementById("goal").value;
+
+            const work =
+                document.getElementById("work").value;
+
+            const rankedCareers = careers.map(function(career) {
+                let score = 0;
+                const reasons = [];
+
+                if (career.interest.includes(interest)) {
+                    score += 4;
+                    reasons.push("your interest");
+                }
+
+                if (career.skills.includes(skill)) {
+                    score += 3;
+                    reasons.push("your strongest skill");
+                }
+
+                if (career.work.includes(work)) {
+                    score += 2;
+                    reasons.push("your preferred work type");
+                }
+
+                if (career.goals.includes(goal)) {
+                    score += 3;
+                    reasons.push("your career goal");
+                }
+
+                // Give extra priority to a government career
+                // when the user specifically selects that goal.
+                if (
+                    goal === "government" &&
+                    career.goals.includes("government")
+                ) {
+                    score += 8;
+                }
+
+                return {
+                    career: career,
+                    score: score,
+                    reasons: reasons
+                };
+            });
+
+            rankedCareers.sort(function(a, b) {
+                return b.score - a.score;
+            });
+
+            const best = rankedCareers[0];
+            const alternative = rankedCareers[1];
+
+            // Maximum possible score is 20.
+            const percentage = Math.round(
+                (best.score / 20) * 100
+            );
+
+            result.innerHTML = `
+                <h2>Hello ${escapeHTML(name)}! 👋</h2>
+
+                <h3>Your Recommended Career</h3>
+                <h2>${escapeHTML(best.career.name)}</h2>
+
+                <p>${escapeHTML(best.career.description)}</p>
+
+                <p class="score">
+                    Match Score: ${best.score} / 20 (${percentage}%)
+                </p>
+
+                <h3>Why This Career?</h3>
+                <p>
+                    ${
+                        best.reasons.length > 0
+                        ? "Your answers matched " +
+                          best.reasons.map(escapeHTML).join(", ") + "."
+                        : "This is the closest match in our career list."
+                    }
+                </p>
+
+                <h3>Skill-Gap Analysis: Topics to Assess</h3>
+                <p>
+                    These are suggested learning areas. Since you selected
+                    only one strongest skill, the system cannot know which
+                    topics you already know.
+                </p>
+
+                <ul>
+                    ${best.career.learn.map(function(item) {
+                        return "<li>" + escapeHTML(item) + "</li>";
+                    }).join("")}
+                </ul>
+
+                <h3>Your 8-Week Learning Roadmap</h3>
+                <ol>
+                    ${best.career.roadmap.map(function(step) {
+                        return "<li>" + escapeHTML(step) + "</li>";
+                    }).join("")}
+                </ol>
+
+                <h3>Alternative Career</h3>
+                <p>${escapeHTML(alternative.career.name)}</p>
+
+                <p class="note">
+                    This prototype uses rule-based scoring, not a trained
+                    machine-learning model. The score represents how well
+                    your answers match the rules; it is not a probability
+                    of getting a job. Always check official notifications
+                    for government exam eligibility.
+                </p>
+            `;
+
+            result.style.display = "block";
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, function(character) {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[character];
+            });
+        }
+    </script>
 
 </body>
 </html>
