@@ -145,140 +145,177 @@
 
     <script>
 
-   function recommendCareer() {
+  function recommendCareer() {
+    const name = document.getElementById("name").value.trim();
+    const interest = document.getElementById("interest").value;
+    const skill = document.getElementById("skill").value;
+    const goal = document.getElementById("goal").value;
+    const work = document.getElementById("work").value;
+    const result = document.getElementById("result");
 
-            const name = document.getElementById("name").value.trim();
-            const interest = document.getElementById("interest").value;
-            const skill = document.getElementById("skill").value;
-            const goal = document.getElementById("goal").value;
-            const work = document.getElementById("work").value;
+    if (!name || !interest || !skill || !goal || !work) {
+        result.style.display = "block";
+        result.innerHTML = "<h3>⚠️ Please fill in all the details.</h3>";
+        return;
+    }
 
-            const result = document.getElementById("result");
+    const careers = [
+        {
+            name: "Software Developer 💻",
+            interests: ["coding"],
+            skills: ["programming"],
+            works: ["technical"],
+            goals: ["job", "salary"],
+            learn: ["Java", "Python", "SQL", "Git", "Data Structures"],
+            jobs: ["Software Developer", "Backend Developer"],
+            roadmap: [
+                "Weeks 1–2: Java basics and problem solving",
+                "Weeks 3–4: Object-oriented programming and SQL",
+                "Weeks 5–6: Data Structures and Git",
+                "Weeks 7–8: Build a project and practise interviews"
+            ]
+        },
+        {
+            name: "Data Analyst 📊",
+            interests: ["data"],
+            skills: ["analysis"],
+            works: ["analytical"],
+            goals: ["job", "salary"],
+            learn: ["Excel", "SQL", "Python", "Power BI"],
+            jobs: ["Data Analyst", "Business Intelligence Analyst"],
+            roadmap: [
+                "Weeks 1–2: Excel and data cleaning",
+                "Weeks 3–4: SQL queries and practice",
+                "Weeks 5–6: Power BI dashboards and Python",
+                "Weeks 7–8: Build a data analysis project"
+            ]
+        },
+        {
+            name: "UI/UX Designer 🎨",
+            interests: ["design"],
+            skills: ["creativity"],
+            works: ["creative"],
+            goals: ["job", "business"],
+            learn: ["Design principles", "Figma", "Wireframes", "Prototyping"],
+            jobs: ["UI Designer", "UX Designer"],
+            roadmap: [
+                "Weeks 1–2: Learn design principles",
+                "Weeks 3–4: Practise Figma",
+                "Weeks 5–6: Create app screens and prototypes",
+                "Weeks 7–8: Build a portfolio project"
+            ]
+        },
+        {
+            name: "Business Analyst 📈",
+            interests: ["business", "data"],
+            skills: ["analysis", "communication"],
+            works: ["analytical", "people"],
+            goals: ["job", "salary", "business"],
+            learn: ["Excel", "SQL", "Communication", "Requirements analysis"],
+            jobs: ["Business Analyst", "Operations Analyst"],
+            roadmap: [
+                "Weeks 1–2: Excel and communication",
+                "Weeks 3–4: Business analysis fundamentals",
+                "Weeks 5–6: SQL and requirement documents",
+                "Weeks 7–8: Complete a case-study project"
+            ]
+        },
+        {
+            name: "Government Technology Career 🏛️",
+            interests: ["coding", "data", "business"],
+            skills: ["programming", "analysis", "communication"],
+            works: ["technical", "analytical", "people"],
+            goals: ["government"],
+            learn: ["Aptitude", "Reasoning", "General Awareness", "Computer Basics"],
+            jobs: ["Government IT Officer", "Technical Assistant"],
+            roadmap: [
+                "Weeks 1–2: Check suitable exams and eligibility",
+                "Weeks 3–4: Practise quantitative aptitude",
+                "Weeks 5–6: Practise reasoning and general awareness",
+                "Weeks 7–8: Solve mock tests and review mistakes"
+            ]
+        },
+        {
+            name: "Entrepreneur / Startup Founder 🚀",
+            interests: ["business", "design"],
+            skills: ["communication", "creativity"],
+            works: ["people", "creative"],
+            goals: ["business", "salary"],
+            learn: ["Market research", "Marketing", "Finance basics", "Presentation"],
+            jobs: ["Startup Founder", "Business Owner"],
+            roadmap: [
+                "Weeks 1–2: Identify a problem to solve",
+                "Weeks 3–4: Research customers and competitors",
+                "Weeks 5–6: Create a simple business plan",
+                "Weeks 7–8: Test your idea and gather feedback"
+            ]
+        }
+    ];
 
-            if (
-                name === "" ||
-                interest === "" ||
-                skill === "" ||
-                goal === "" ||
-                work === ""
-            ) {
-                result.style.display = "block";
+    function calculateScore(career) {
+        let score = 0;
+        if (career.interests.includes(interest)) score += 4;
+        if (career.skills.includes(skill)) score += 3;
+        if (career.works.includes(work)) score += 2;
+        if (career.goals.includes(goal)) score += 3;
 
-                result.innerHTML =
-                    "<h3>⚠️ Please fill in all the details.</h3>";
-
-                return;
-            }
-
-            let career;
-            let skills;
-            let jobs;
-            let roadmap;
-
-            if (goal === "government") {
-
-                career = "Government Technology Career 🏛️";
-                skills = "Computer Basics, Programming, Aptitude, General Knowledge";
-                jobs = "Government IT Jobs, Technical Assistant, Computer Operator";
-                roadmap = "Learn technical skills → Prepare for exams → Apply for government jobs";
-
-            }
-
-            else if (work === "technical" && interest === "coding") {
-
-                career = "Software Developer 💻";
-                skills = "Java, Python, SQL, Git";
-                jobs = "Software Developer, Backend Developer";
-                roadmap = "Programming → DSA → Projects → Interview Preparation";
-
-            }
-
-            else if (work === "analytical" && interest === "data") {
-
-                career = "Data Analyst 📊";
-                skills = "Excel, SQL, Python, Power BI";
-                jobs = "Data Analyst, Business Intelligence Analyst";
-                roadmap = "Excel → SQL → Power BI → Python → Projects";
-
-            }
-
-            else if (work === "creative" && interest === "design") {
-
-                career = "UI/UX Designer 🎨";
-                skills = "Figma, UI Design, UX Research";
-                jobs = "UI Designer, UX Designer";
-                roadmap = "Design Basics → Figma → Projects → Portfolio";
-
-            }
-
-            else if (work === "people" && interest === "business") {
-
-                career = "Business Analyst 📈";
-                skills = "Communication, Excel, SQL, Power BI";
-                jobs = "Business Analyst, Associate Business Analyst";
-                roadmap = "Business Basics → Excel → SQL → Power BI → Projects";
-
-            }
-
-            else if (interest === "coding" && skill === "programming") {
-
-                career = "Software Developer 💻";
-                skills = "Java, Python, SQL, Git";
-                jobs = "Software Developer, Backend Developer";
-                roadmap = "Programming → DSA → Projects → Interview Preparation";
-
-            }
-
-            else if (interest === "data" && skill === "analysis") {
-
-                career = "Data Analyst 📊";
-                skills = "Excel, SQL, Python, Power BI";
-                jobs = "Data Analyst, Business Intelligence Analyst";
-                roadmap = "Excel → SQL → Power BI → Python → Projects";
-
-            }
-
-            else if (interest === "design" && skill === "creativity") {
-
-                career = "UI/UX Designer 🎨";
-                skills = "Figma, UI Design, UX Research";
-                jobs = "UI Designer, UX Designer";
-                roadmap = "Design Basics → Figma → Projects → Portfolio";
-
-            }
-
-            else if (interest === "business" && skill === "communication") {
-
-                career = "Business Analyst 📈";
-                skills = "Communication, Excel, SQL, Power BI";
-                jobs = "Business Analyst, Associate Business Analyst";
-                roadmap = "Business Basics → Excel → SQL → Power BI → Projects";
-
-            }
-
-            else {
-
-                career = "Technology & Business Professional 🚀";
-                skills = "Communication, Problem Solving, Digital Skills";
-                jobs = "Technology Associate, Business Associate";
-                roadmap = "Build skills → Complete projects → Gain experience → Apply for jobs";
-
-            }
-
-            result.style.display = "block";
-
-            result.innerHTML =
-                "<h2>Hello " + name + "! 👋</h2>" +
-                "<h2>🎯 Recommended Career</h2>" +
-                "<h3>" + career + "</h3>" +
-                "<h3>📚 Skills to Learn</h3>" +
-                "<p>" + skills + "</p>" +
-                "<h3>💼 Possible Job Roles</h3>" +
-                "<p>" + jobs + "</p>" +
-                "<h3>🛣️ Career Roadmap</h3>" +
-                "<p>" + roadmap + "</p>";
+        // Give extra priority when the user selects a government career goal.
+        if (goal === "government" && career.goals.includes("government")) {
+            score += 8;
         }
 
+        return score;
+    }
+
+    const ranked = careers
+        .map(career => ({ ...career, score: calculateScore(career) }))
+        .sort((a, b) => b.score - a.score);
+
+    const best = ranked[0];
+    const alternative = ranked[1];
+    const percentage = Math.round((best.score / 20) * 100);
+
+    result.style.display = "block";
+    result.innerHTML = `
+        <h2>Hello ${escapeHTML(name)}! 👋</h2>
+
+        <h2>🎯 Recommended Career</h2>
+        <h3>${best.name}</h3>
+
+        <h3>📊 Career Match</h3>
+        <p><strong>${percentage}% match</strong></p>
+        <progress value="${percentage}" max="100" style="width:100%;height:18px;"></progress>
+        <p>This is a rule-based estimate based on your selected answers, not a guarantee of career success.</p>
+
+        <h3>📚 Skills to Learn</h3>
+        <p>${best.learn.join(", ")}</p>
+
+        <h3>🧩 Skills to Develop Next</h3>
+        <p>Your selected strongest skill: ${skill.replace(/-/g, " ")}.</p>
+        <p>Start learning the topics listed above and practise them through small projects.</p>
+
+        <h3>💼 Possible Job Roles</h3>
+        <p>${best.jobs.join(", ")}</p>
+
+        <h3>🔄 Alternative Career</h3>
+        <p>${alternative.name}</p>
+
+        <h3>🗺️ 8-Week Career Roadmap</h3>
+        <ul>
+            ${best.roadmap.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+    `;
+}
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
     </script>
 
 </body>
